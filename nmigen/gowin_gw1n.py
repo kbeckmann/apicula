@@ -302,12 +302,16 @@ class GowinGW1NPlatform(TemplatedPlatform):
                         break
 
             assert resource_name, f"resource {port.name} not found"
+
+            out = Signal()
+            m.d.comb += pin[bit].eq(out if not invert else ~out)
+
             m.submodules["{}_{}".format(pin.name, bit)] = Instance("GENERIC_IOB",
                 a_BEL=resource_name,
                 p_INPUT_USED=1,
                 p_OUTPUT_USED=0,
                 i_I=port[bit],
-                o_O=pin[bit] if not invert else ~pin[bit],
+                o_O=out,
             )
         return m
 
@@ -342,6 +346,7 @@ class GowinGW1NPlatform(TemplatedPlatform):
         return m
 
     def get_tristate(self, pin, port, attrs, invert):
+        return False
         self._check_feature("single-ended tristate", pin, attrs,
                             valid_xdrs=(0, 1), valid_attrs=True)
         # TODO
