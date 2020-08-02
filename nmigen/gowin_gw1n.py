@@ -307,7 +307,7 @@ class GowinGW1NPlatform(TemplatedPlatform):
                 p_INPUT_USED=1,
                 p_OUTPUT_USED=0,
                 i_I=port[bit],
-                o_O=pin[bit]
+                o_O=pin[bit] if not invert else ~pin[bit],
             )
         return m
 
