@@ -66,7 +66,7 @@ for row, rowdata in enumerate(db.grid, 1):
                 iname = f"R{row}C{col}_{inp}"
                 oname = f"R{row}C{col}_{outp}"
                 oename = f"R{row}C{col}_{oe}"
-                #print("IOB", row, col, iname, oname, oename)
+                # print(belname, "IOB", row, col, idx, iname, oname, oename)
                 ctx.addBel(name=belname, type="GENERIC_IOB", loc=Loc(col, row, z), gb=False)
                 ctx.addBelInput(bel=belname, name="I", wire=iname)
                 ctx.addBelInput(bel=belname, name="EN", wire=oename)
