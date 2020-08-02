@@ -74,7 +74,7 @@ class GowinGW1NPlatform(TemplatedPlatform):
             {% endfor %}
             read_ilang {{name}}.il
             {{get_override("script_after_read")|default("# (script_after_read placeholder)")}}
-            tcl /home/konrad/dev/apicula/generic/synth/synth_generic.tcl 4
+            tcl ../../generic/synth/synth_generic.tcl 4
             {{get_override("script_after_synth")|default("# (script_after_synth placeholder)")}}
             write_json {{name}}.json
         """,
@@ -104,10 +104,10 @@ class GowinGW1NPlatform(TemplatedPlatform):
             {{quiet("--quiet")}}
             {{get_override("nextpnr_opts")|options}}
             --log {{name}}.tim
-            --pre-pack /home/konrad/dev/apicula/generic/simple.py
-            --pre-place /home/konrad/dev/apicula/generic/simple_timing.py
+            --pre-pack ../../generic/simple.py
+            --pre-place ../../generic/simple_timing.py
             --json {{name}}.json
-            --post-route /home/konrad/dev/apicula/generic/bitstream.py
+            --post-route ../../generic/bitstream.py
             --write pnr{{name}}.json
 #            --pcf {{name}}.pcf
         """,
@@ -115,7 +115,7 @@ class GowinGW1NPlatform(TemplatedPlatform):
         r"""
         {{invoke_tool("bash")}}
             -c "
-                python3 /home/konrad/dev/apicula/gowin_pack.py pnr{{name}}.json {{name}}.fs
+                python3 ../../gowin_pack.py pnr{{name}}.json {{name}}.fs
             "
         """,
 
@@ -123,7 +123,7 @@ class GowinGW1NPlatform(TemplatedPlatform):
         # {{invoke_tool("yosys")}}
         #     {{quiet("-q")}}
         #     -p "
-        #         read_verilog -lib /home/konrad/dev/apicula/generic/synth/prims.v;
+        #         read_verilog -lib ../../generic/synth/prims.v;
         #         read_json pnr{{name}}.json;
         #         dump -o {{name}}.debug.il;
         #         show -format png -prefix {{name}};
