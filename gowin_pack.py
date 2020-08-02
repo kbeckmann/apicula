@@ -120,7 +120,8 @@ def header_footer(db, bs):
     db.cmd_ftr[1] = bytearray.fromhex(f"{0x0A << 56 | checksum:016x}")
 
 if __name__ == '__main__':
-    with open(f"{device}.pickle", 'rb') as f:
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    with open(os.path.join(dir_path, device) + ".pickle", 'rb') as f:
         db = pickle.load(f)
     with open(sys.argv[1]) as f:
         pnr = json.load(f)

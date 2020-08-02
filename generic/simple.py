@@ -4,7 +4,8 @@ import json
 from itertools import chain
 import re
 import code
-sys.path.append(os.path.join(sys.path[0], '..'))
+dir_path = os.path.dirname(os.path.realpath(__file__))
+sys.path.append(os.path.join(dir_path, '..'))
 from wirenames import wirenames
 import pickle
 import chipdb
@@ -13,7 +14,7 @@ device = os.getenv("DEVICE")
 if not device:
     raise Exception("DEVICE not set")
 
-with open(f"../{device}.pickle", 'rb') as f:
+with open(f"{dir_path}/../{device}.pickle", 'rb') as f:
     db = pickle.load(f)
 
 def addWire(row, col, wire):
