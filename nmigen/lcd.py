@@ -5,6 +5,8 @@ import os
 import subprocess
 import itertools
 
+# Depends on pergola_projects. To install:
+# python3 -m pip install --user git+https://github.com/kbeckmann/pergola_projects
 from pergola.gateware.vga import *
 from pergola.gateware.vga_testimage import *
 
