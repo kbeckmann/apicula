@@ -18,7 +18,7 @@ class Blinky(Elaboratable):
                     break
             return resources
 
-        leds     = [res.o for res in get_all_resources("led")]
+        leds = [res.o for res in get_all_resources("led")]
 
         clk_freq = platform.default_clk_frequency
         timer = Signal(range(int(clk_freq//2)), reset=int(clk_freq//2) - 1)
@@ -27,7 +27,7 @@ class Blinky(Elaboratable):
         m.d.comb += Cat(leds).eq(flops)
         with m.If(timer == 0):
             m.d.sync += timer.eq(timer.reset)
-            m.d.sync += flops.eq(~flops)
+            m.d.sync += flops.eq(flops + 1)
         with m.Else():
             m.d.sync += timer.eq(timer - 1)
 
