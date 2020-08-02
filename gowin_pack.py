@@ -133,4 +133,5 @@ if __name__ == '__main__':
     res = chipdb.fuse_bitmap(db, tilemap)
     header_footer(db, res)
     bslib.display('pack.png', res)
-    bslib.write_bitstream('pack.fs', res, db.cmd_hdr, db.cmd_ftr)
+    out_file = sys.argv[2] if len(sys.argv) > 2 else 'pack.fs'
+    bslib.write_bitstream(out_file, res, db.cmd_hdr, db.cmd_ftr)
