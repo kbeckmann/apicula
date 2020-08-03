@@ -43,11 +43,12 @@ class TangNanoPlatform(GowinGW1NPlatform):
         *ButtonResources(pins="R11C3_IOBB R11C6_IOBB", invert=True),
 
         # 9=IOL6G, 8=IOL6F
+        # R6C1_IOBF must stay as an input, otherwise the programmer will not be able to program the fpga
         # UARTResource(0,
         #     rx="9", tx="8",
         #     attrs=Attrs(IO_TYPE="LVCMOS33", PULLUP=1)
         # ),
-        # UARTResource(0, rx="R6C1_IOBG", tx="R6C1_IOBF"), # R6C1_IOBF is not supported yet
+        # UARTResource(0, rx="R6C1_IOBG", tx="R6C1_IOBF"), 
 
         # cs=IOB11A, clk=IOB11B, mosi=IOB14B, miso=IOB16A, wp=IOB14A, hold=IOB16B
         # *SPIFlashResources(0,
