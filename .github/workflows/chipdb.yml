@@ -4,6 +4,7 @@ on:
   push:
     branches:
         - master
+        - pr_ci_tmp
 
 jobs:
   build:
