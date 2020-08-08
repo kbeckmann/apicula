@@ -120,7 +120,8 @@ def header_footer(db, bs):
     db.cmd_ftr[1] = bytearray.fromhex(f"{0x0A << 56 | checksum:016x}")
 
 if __name__ == '__main__':
-    with open(f"{device}.pickle", 'rb') as f:
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    with open(os.path.join(dir_path, device) + ".pickle", 'rb') as f:
         db = pickle.load(f)
     with open(sys.argv[1]) as f:
         pnr = json.load(f)
@@ -132,4 +133,5 @@ if __name__ == '__main__':
     res = chipdb.fuse_bitmap(db, tilemap)
     header_footer(db, res)
     bslib.display('pack.png', res)
-    bslib.write_bitstream('pack.fs', res, db.cmd_hdr, db.cmd_ftr)
+    out_file = sys.argv[2] if len(sys.argv) > 2 else 'pack.fs'
+    bslib.write_bitstream(out_file, res, db.cmd_hdr, db.cmd_ftr)

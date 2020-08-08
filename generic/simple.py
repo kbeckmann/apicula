@@ -3,7 +3,8 @@ import os
 from itertools import chain
 import re
 import code
-sys.path.append(os.path.join(sys.path[0], '..'))
+dir_path = os.path.dirname(os.path.realpath(__file__))
+sys.path.append(os.path.join(dir_path, '..'))
 from wirenames import wirenames
 import pickle
 import chipdb
@@ -12,7 +13,7 @@ device = os.getenv("DEVICE")
 if not device:
     raise Exception("DEVICE not set")
 
-with open(f"../{device}.pickle", 'rb') as f:
+with open(f"{dir_path}/../{device}.pickle", 'rb') as f:
     db = pickle.load(f)
 
 timing_class = "C6/I5" # TODO parameterize
@@ -64,7 +65,7 @@ for row, rowdata in enumerate(db.grid, 1):
                 iname = f"R{row}C{col}_{inp}"
                 oname = f"R{row}C{col}_{outp}"
                 oename = f"R{row}C{col}_{oe}"
-                #print("IOB", row, col, iname, oname, oename)
+                # print(belname, "IOB", row, col, idx, iname, oname, oename)
                 ctx.addBel(name=belname, type="GENERIC_IOB", loc=Loc(col, row, z), gb=False)
                 ctx.addBelInput(bel=belname, name="I", wire=iname)
                 ctx.addBelInput(bel=belname, name="EN", wire=oename)

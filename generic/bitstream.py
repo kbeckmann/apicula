@@ -1,6 +1,7 @@
+dir_path = os.path.dirname(os.path.realpath(__file__))
+sys.path.append(dir_path)
 from write_fasm import *
 import re
-sys.path.append(os.path.join(sys.path[0], '..'))
 import codegen
 
 # Need to tell FASM generator how to write parameters
