@@ -2,13 +2,16 @@ import os
 import pickle
 import chipdb
 
+dir_path = os.path.dirname(os.path.realpath(__file__))
+sys.path.append(os.path.join(dir_path, '..'))
+
 device = os.getenv("DEVICE")
 if not device:
     raise Exception("DEVICE not set")
 
 timing_class = "C6/I5" # TODO parameterize
 
-with open(f"../{device}.pickle", 'rb') as f:
+with open(f"{dir_path}/../{device}.pickle", 'rb') as f:
     db = pickle.load(f)
 
 timing = db.timing[timing_class]

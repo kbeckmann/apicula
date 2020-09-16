@@ -293,11 +293,11 @@ class GowinGW1NPlatform(TemplatedPlatform):
             resource_name = None
             for port_name, pin_name, attrs in self.iter_port_constraints_bits():
                 if len(port) == 1:
-                    if (port_name == port.name):
+                    if (port_name == port.name) or (port_name == f"{port.name}__io"):
                         resource_name = pin_name
                         break
                 else:
-                    if (port_name == f"{port.name}[{bit}]"):
+                    if (port_name == f"{port.name}__io[{bit}]"):
                         resource_name = pin_name
                         break
 
@@ -325,12 +325,13 @@ class GowinGW1NPlatform(TemplatedPlatform):
             # Hack because we don't have PCF/LPF support yet
             resource_name = None
             for port_name, pin_name, attrs in self.iter_port_constraints_bits():
+                print(port_name, pin_name, attrs, port.name)
                 if len(port) == 1:
-                    if (port_name == port.name):
+                    if (port_name == port.name) or (port_name == f"{port.name}__io"):
                         resource_name = pin_name
                         break
                 else:
-                    if (port_name == f"{port.name}[{bit}]"):
+                    if (port_name == f"{port.name}__io[{bit}]"):
                         resource_name = pin_name
                         break
 
